@@ -1,0 +1,5 @@
+
+select cast(LAT_N as decimal(10,4)) from
+(select ROW_NUMBER()OVER(partition by 1 order by LAT_N)RN, LAT_N  from Station) rwn
+where RN=(select ceiling(cast(count(*)as float)/2) from Station)
+
